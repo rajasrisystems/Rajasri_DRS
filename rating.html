@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>Rajasri DRS</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="css/all.css">
+</head>
+<!--Design Prepared by Rajasri Systems-->   
+<body>
+<div id="wrapper">
+	<div id="header">
+		<a href="http://www.rajasri.net/" class="inner-logo"><img src="img/rajasri.jpeg" alt=""/></a>
+		<ul id="top-navigation">
+			<li><a href="controlPanel.html" class="navigation_link">Homepage</a></li>
+			<li class="active"><a href="rating.html" class="navigation_link">Rating</a></li>
+			<li><a href="report.html" class="navigation_link">Reports</a></li>
+			<li><a href="index.html" class="navigation_link">Logout</a></li>
+		</ul>
+	</div>
+<div style="clear:both;"></div>
+<div id="middle"> 
+  <div id="center-column">
+    <div class="top-bar-header">
+      <h1>Rating</h1>
+      <div class="breadcrumbs"><a href="controlPanel.html" >Homepage</a> >> Rating</div>
+    </div>
+    <br />
+    	<div class="manage-grid">
+		<form action="rating.html" >
+			<table border="0" cellpadding="0" cellspacing="0" class="grid-table">
+				<th colspan="8" style="text-align:left">Rating</th>
+				<tr style="border-bottom:none;">
+					<td style="text-align:right;border-bottom:none;" width="10%" valign="top" nowrap="nowrap">Rating Date:</td>
+					<td style="text-align:left;border-bottom:none;" width="10%"valign="top">
+						<input type="text" name="ratingdate" id="ratingdate" value="28/07/2016"/ size="12">
+					</td>
+					<td style="text-align:right;border-bottom:none;" width="10%"valign="top">Resource:</td>
+					<td style="text-align:left;border-bottom:none;" width="5%"valign="top"> 
+						<select id="resource" name="resource" style="width: 120px;">
+	                        			<option value="">--Select--</option>
+	           	        			<option value="SN">SN</option>
+	                        			<option value="SR">SR</option>
+	                        			<option value="MA">MA</option>
+	                        			<option value="MR">MR</option>
+	                        			<option value="CK">CK</option>
+	                        			<option value="TK">TK</option>
+	                        			<option value="SM">SM</option>
+	      					</select>
+					</td>
+					<td style="text-align:right;border-bottom:none;" width="10%"valign="top">Code:</td>
+					<td style="text-align:left;border-bottom:none;" width="10%"valign="top">
+						<select id="code" name="code" style="width: 250px;">
+	                        			<option value="">--Select--</option>
+	           	        			<option value="G101">G101 - Good job note from client</option>
+	                        			<option value="G102">G102 - Great job! - note from client</option>
+	                        			<option value="G103">G103 - Proper follow-up with client</option>
+	                        			<option value="G104">G104 - Good status update to client</option>
+	                        			<option value="G105">G105 - Ask good questions to client</option>
+	                        			<option value="G106">G106 - Ask questions to client</option>
+	                        			<option value="G107">G107 - Work extra hours to finish task</option>
+	      				     	</select>
+					</td>
+					<td style="text-align:right;border-bottom:none; vertical-align:top">Notes:</td>
+					<td style="text-align:left;border-bottom:none;">
+						<textarea rows="3" cols="40" name="notes"></textarea>
+					</td>
+					
+					<tr style="border-bottom:none;">
+					<td colspan="8"> 		
+	 					<input type=submit name="submit" value="Submit"> 
+					</td></tr>
+				</tr>
+			</table>
+		</form>
+		<div class="submit"></div>
+		<table border="0" cellpadding="2" cellspacing="0" class="grid-table">
+			<th colspan="6" style="text-align:left"> Report </th>
+			<tr>&nbsp;</tr>
+			<th width="8%">S.No.</th>
+			<th width="8%">Resource</th>
+			<th width="12%">Code</th>
+			<th> Notes </th>
+			<th width="12%">Action</th> 
+			<tr> 
+				<td> 1 </td>
+				<td> MA </td>
+				<td> G103</td>
+				<td style="text-align:left;">Proper follow-up with client</td>
+				<td style="padding:8px"><a href="#"><img src="img/b_edit.png" ></a>&nbsp;&nbsp;
+				<a href="#"><img src="img/b_drop.png" ></a></td>
+			</tr>
+			<tr> 
+				<td> 2 </td>
+				<td> CK </td>
+				<td> G107</td>
+				<td style="text-align:left;">Work extra hours to finish task</td>
+				<td style="padding:8px"><a href="#"><img src="img/b_edit.png" ></a>&nbsp;&nbsp;
+				<a href="#"><img src="img/b_drop.png" ></a></td>
+			</tr>
+			<tr> 
+				<td> 3 </td>
+				<td> MR </td>
+				<td> G104</td>
+				<td style="text-align:left;">Good status update to client</td>
+				<td style="padding:8px"><a href="#"><img src="img/b_edit.png" ></a>&nbsp;&nbsp;
+				<a href="#"><img src="img/b_drop.png" ></a></td>
+			</tr>
+			<tr> 
+				<td> 4 </td>
+				<td> SM </td>
+				<td> G107</td>
+				<td style="text-align:left;">Work extra hours to finish task</td>
+				<td style="padding:8px"><a href="#"><img src="img/b_edit.png" ></a>&nbsp;&nbsp;
+				<a href="#"><img src="img/b_drop.png" ></a></td>
+			</tr>
+			<tr> 
+				<td> 5 </td>
+				<td> SN </td>
+				<td> G109</td>
+				<td style="text-align:left;">Met deadlines</td>
+				<td style="padding:8px"><a href="#"><img src="img/b_edit.png" ></a>&nbsp;&nbsp;
+				<a href="#"><img src="img/b_drop.png" ></a></td>
+			</tr>
+			<tr> 
+				<td> 6 </td>
+				<td> TG </td>
+				<td> G109</td>
+				<td style="text-align:left;">Met deadlines</td>
+				<td style="padding:8px"><a href="#"><img src="img/b_edit.png" ></a>&nbsp;&nbsp;
+				<a href="#"><img src="img/b_drop.png" ></a></td>
+			</tr>
+		</table>
+		<div class="submit"></div>
+	</div>
+  </div>
+</div>
+</div>	
+<div id="footer">Copyright &copy; 2016 Rajasri Systems Pvt Ltd. All rights reserved.</div>
+</body>
+</html>
