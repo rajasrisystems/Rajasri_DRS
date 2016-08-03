@@ -12,7 +12,17 @@
     </div>
     <br />
     <div class="dashboard-table">
-          <div class="leftcolumn">
+			<div class="leftcolumn">
+				<div class="stroke" align="center"> 
+				<a href="Admin.php"><img src="img/admin.png" border="0" width="56" height="56" /></a><br />
+				<a href="Admin.php" class="adminlink"><span>Admin Management</span></a> </div>
+			</div>	
+			<div class="leftcolumn">
+				<div class="stroke" align="center"> 
+				<a href="resource.php"><img src="img/resource.png" border="0" width="56" height="56" /></a><br />
+				<a href="resource.php" class="adminlink"><span>Resource Management</span></a> </div>
+			</div>
+			<div class="leftcolumn">
             <div class="stroke" align="center"> 
 			  <a href="rating.php"><img src="img/rating.png" border="0" width="56" height="56" /></a><br />
               <a href="rating.php" class="adminlink"><span>Rating Management</span></a> </div>
@@ -23,6 +33,10 @@
 			  <a href="report.php"><img src="img/report.png" border="0" width="56" height="56" /></a><br />
               <a href="report.php" class="adminlink"><span>Reports Management</span></a> </div>
           </div>
+		  
+		  
+		  
+		  
     </div>
  </div>
 </div>

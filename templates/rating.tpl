@@ -9,7 +9,7 @@
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
-	$( function() {$( "#ratingdate" ).datepicker({dateFormat:"dd/mm/yy"});});
+	$( function() {$( "#ratingdate" ).datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate", new Date());});
 	jQuery(document).ready(function($){
 	$("#code").autocomplete({
 	source: function(request, response) {
@@ -103,7 +103,8 @@
 					<td style="text-align:left;border-bottom:none;" width="5%"valign="top"> 
 					<select id="resource" name="resource" style="width: 120px;">
 						<option value="">--Select--</option>
-						{foreach item=resource from=$data}<p><option value='{$resource.ID}' {if $getRating.0.ResourceID eq $resource.ID} selected="selected" {/if}>{$resource.ResourceInitial}</option></p>
+						{foreach item=resource from=$data}<p><option value='{$resource.ID}' 
+			{if $getRating.0.ResourceID eq $resource.ID} selected="selected" {/if}>{$resource.ResourceInitial}</option></p>
 						{/foreach}	
 					</select>
 					</td>
@@ -135,7 +136,7 @@
 			<th width="12%">Action</th> 
 			{assign var=number value=1}
 			  {section name=i loop=$displaydet}
-			<tr>
+			   <tr>
 				<td>{$number++}</td>
 				<td>{$displaydet[i].ResourceInitial}</td>
 				<td>{$displaydet[i].Code}</td>
@@ -145,7 +146,7 @@
 				<a href="drop.php?Del_Id={$displaydet[i].RatingID}"><img src="img/b_drop.png" onclick="return myFunction();" ></a>
 				<input type="hidden" name="delvar" id="delvar" value="{$displaydet[i].RatingID}">
 				</td>
-			</tr>
+			  </tr>
 			 {sectionelse}
 				 <tr><td colspan="5">No records found</td></tr>
 			 {/section}
