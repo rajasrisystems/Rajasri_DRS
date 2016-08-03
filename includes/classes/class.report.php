@@ -12,55 +12,66 @@ class Report extends MysqlFns
 		$this->Operator			= '';
 		$this->PerPage			= '';
 		}
-	function getAllResources()
+	// All resources
+	function getResourceName()
 	{
 		global $objSmarty;
-		$report_date=explode("/", $_REQUEST['ratingdate']);
-		$newdate=$rat_date[2]."-".$rat_date[1]."-".$rat_date[0];
-
-
-
-		$disvar = "SELECT * FROM resource";
-		$result = $this->ExecuteQuery($disvar,"select");
-		$objSmarty->assign('resdata', $result);	
-	}
-	function getAllRating()
-	{
-		global $objSmarty,$config;
-
-		$where='';
-		if(isset($_REQUEST['resourceId']) && $_REQUEST['resourceId']!=""){
-			$where.="and ResourceID='".$_REQUEST['resourceId']."'";
+		$getmon = $_REQUEST['month'];
+		$getyr  = $_REQUEST['year'];
+		/*$tesratdate = "SELECT RatingDate FROM rating";			
+		$ratdate = $this->ExecuteQuery($tesratdate, "select");
+		$couvar = count($ratdate);
+		for ($x = 0; $x < $couvar; $x++) 
+		{
+			$rat_date[$x] = explode("-", $ratdate[$x]['RatingDate']);
 		}
-		if($_REQUEST['Date_Month']!="" && $_REQUEST['Date_Year']!=""){
-			$date=$_REQUEST['Date_Month'].'/'.$_REQUEST['Date_Year'];
-			$where.="and date_format(RatingDate,'%m/%Y')='".$date."'";
-		}
-		$rptshw = "SELECT * FROM rating where 1 $where";
-		$data=$this->ExecuteQuery($rptshw, "select");
-		$objSmarty->assign('rptshw', $data);
+		for($i=0; $i< $couvar;$i++)
+		{
+		if($rat_date[$i][1]== $getmon && $rat_date[$i][0] == $getyr)
+			{ 
+		     	$resource="SELECT ResourceID FROM rating WHERE RatingDate ='".$rat_date[$i][0]."-".$rat_date[$i][1]."-".$rat_date[$i][2]."'";
+		    	$exeresource = $this->ExecuteQuery($resource,"select");
+		   	$resid=$exeresource[0]['ResourceID'];
+			$rptshw = "SELECT ResourceInitial FROM resource WHERE ID = '$resid'";
+			$resdata = $this->ExecuteQuery($rptshw,"select");
+			$resinitial[]=$resdata[0]['ResourceInitial'];
+			}
+		} */
+		$date=$getmon.'/'.$getyr;
+		$select="select * from rating r,resource re where date_format(r.RatingDate, '%m/%Y')='".$date."' and re.ID=r.ResourceID group by r.ResourceID";
+		$exeresource = $this->ExecuteQuery($select,"select");
+		$objSmarty->assign('resdata',$exeresource);
+	
 	}
-
-	function getResourceName($ResourceID)
+	function oneresource()
 	{
 		global $objSmarty;
-		$rptshw = "SELECT * FROM resource where ID = '".$ResourceID."'";
-		$data=$this->ExecuteQuery($rptshw, "select");
-		return $data[0]['ResourceInitial'];
+		$getmon = $_REQUEST['month'];
+		$getyr  = $_REQUEST['year'];
+		$getini = $_REQUEST['newresid'];
+		/*$tesratdate = "SELECT RatingDate FROM rating";			
+		$ratdate = $this->ExecuteQuery($tesratdate, "select");
+		$couvar = count($ratdate);
+		for ($x = 0; $x < $couvar; $x++) 
+		{
+			$rat_date[$x] = explode("-", $ratdate[$x]['RatingDate']);
+		}
+		print_r($rat_date);
+		for($i=0; $i< $couvar;$i++)
+		{
+		if($rat_date[$i][1]== $getmon && $rat_date[$i][0] == $getyr)
+			{ 
+		     	echo $resource="SELECT Notes FROM rating WHERE ResourceID = '".$getini."' AND RatingDate ='".$rat_date[$i][0]."-".$rat_date[$i][1]."-".$rat_date[$i][2]."' ";
+		    	$exeresource = $this->ExecuteQuery($resource,"select");
+			    $noteone[]=$exeresource[0]['Notes'];
+			}
+		}print_r($noteone);exit;*/
+		$date=$getmon.'/'.$getyr;
+		$select="select * from rating where ResourceID='".$getini."' and date_format(RatingDate, '%m/%Y')='".$date."'";
+		$exeresource = $this->ExecuteQuery($select,"select");
+		$objSmarty->assign('oneresdata',$exeresource);
+	
 	}
-	// function slctdisp()
-	//{
-	//	global $objSmarty;
-		 
-	//	$tempdisvar= "SELECT * FROM rating r,resource re WHERE r.ResourceID=re.ID";
-	//	$displaydet= $this->ExecuteQuery($tempdisvar, "select");
-	//	$objSmarty->assign('displaydet', $displaydet);
-	//}
+	
 }
-
-
-
-
-
-
 ?>

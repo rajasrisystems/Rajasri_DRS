@@ -62,9 +62,10 @@ class Login extends MysqlFns
 		$a = "INSERT INTO rating(RatingDate,
 					 ResourceID,
 					 CodeID,
-					 Notes) 
+					 Notes,
+					 CreatedBy) 
 				         VALUES 
-				      	 ('$newdate','$newResourceid',(SELECT ID FROM code WHERE Code='$enterCode'),'$newnotes')"; 
+				      	 ('$newdate','$newResourceid',(SELECT ID FROM code WHERE Code='$enterCode'),'$newnotes','".$_SESSION['UserId']."')"; 
 		$this->ExecuteQuery($a, "insert");
 		header("location:rating.php?successmsg=3");// redirecting
 		}		
