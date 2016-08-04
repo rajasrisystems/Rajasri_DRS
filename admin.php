@@ -6,6 +6,15 @@
 	{
 		$objAdmin -> Admin_newuser();
 	}
+	if($_REQUEST['Admin_updateuser']=='1')
+	{
+		$objAdmin->Admin_updateuser($_REQUEST['adminId']);
+	}
+	if($_REQUEST['Ad_Id']!='')
+	{
+		$objAdmin->getAdminbyId($_REQUEST['Ad_Id']);
+	}
+	$objAdmin->show_adminuser();
 	$objSmarty->assign('objReport',$objAdmin);
 	$objSmarty->assign('activePage',"5");
 	$objSmarty->assign('IncludeTpl',"admin.tpl");

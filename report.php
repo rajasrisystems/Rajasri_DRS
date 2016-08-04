@@ -9,6 +9,8 @@
 		 '7'=>"2022", '8'=>"2023", '9'=>"2024", '10'=>"2025", '11'=>"2026", '12'=>"2027",'13'=>"2028",'14'=>"2029",'15'=>"2030");
 	$objSmarty->assign('year',$year);
 	$objSmarty->assign('months',$months);
+	$objSmarty->assign('currentMonth', date('m'));
+	$objSmarty->assign('currentYear', date('Y'));
 	$objLogin->chklogin();
 	$objReport = new Report();
 	$disvar = "SELECT * FROM resource";
@@ -18,16 +20,14 @@
 			$data[] = $row; // store in array	
 		}
 	$objSmarty->assign('tabresdata', $data);	
-	if($_REQUEST['dataction']='1')
+	/*if($_REQUEST['dataction']='1')
 	{
-	$objReport->getResourceName();
-	$objSmarty->assign('showhidvar',"allres");
+	$objReport->allresource();
 	}	
 	if($_REQUEST['singlerestemp']='1')
 	{
 	$objReport->oneresource();
-	$objSmarty->assign('hidshowvar',"oneres");
-	}
+	}*/
 	$objSmarty->assign('activePage',"3");
 	$objSmarty->assign('IncludeTpl',"report.tpl");
 	$objSmarty->display("pagetemplate.tpl");
