@@ -59,5 +59,9 @@
 
 /* Setting some necessary values Here */
 	
+/* Default points*/
+	
+	$config['DefaultPoint']=50;
+	
 	#######################################
 ?>
