@@ -13,7 +13,7 @@ class Report extends MysqlFns
 		$this->PerPage			= '';
 		}
 	// All resources
-	function getResourceName()
+	function allresource()
 	{
 		global $objSmarty;
 		$getmon = $_REQUEST['month'];
@@ -41,7 +41,7 @@ class Report extends MysqlFns
 		$select="select * from rating r,resource re where date_format(r.RatingDate, '%m/%Y')='".$date."' and re.ID=r.ResourceID group by r.ResourceID";
 		$exeresource = $this->ExecuteQuery($select,"select");
 		$objSmarty->assign('resdata',$exeresource);
-	
+			
 	}
 	function oneresource()
 	{

@@ -26,10 +26,38 @@ class Resource extends MysqlFns
 				$inst_var = $this->ExecuteQuery($rs_insrt,'insert');
 				$objSmarty->assign("SuccessMessage", "Resource inserted successfully");
 			}else{
-				$objSmarty->assign("ErrorMessage", "Resource initial already exists");
+				$objSmarty->assign("ErrorMessage", "Resource initial already exists!");
 			}
 		
 		
+	}
+	
+	function show_resource()
+	{
+		global $objSmarty;
+		$newRs_name= $_POST['resource_text'];
+		$newRs_init = $_POST['resource_initial'];
+		$dis_res = "select * from resource";
+		$res =$this->ExecuteQuery($dis_res,'select');
+		$objSmarty->assign('showres',$res);
+	}
+	
+	function getResourcebyId($id)
+	{
+		global $objSmarty,$config;
+		//Get the details from table for edit option
+		$tempdisvar= "SELECT * FROM resource where ID= ' $id'";
+		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
+		$objSmarty->assign('resourceDetails', $displaydet);
+	}
+	
+	function del_adusers($id)
+	{
+		global $objSmarty,$config;
+		//Delete the corresponding record from rating table 
+		$tempdrop = "DELETE FROM admin WHERE ID ='$id'";
+		$this->ExecuteQuery($tempdrop, "delete");
+		header("location:resource.php?successmsg=2");// redirecting
 	}
 		
 }	

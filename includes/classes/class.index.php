@@ -98,7 +98,7 @@ class Login extends MysqlFns
 		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
 		$objSmarty->assign('getRating', $displaydet);
 	}
-	function Update_rating($Id)
+	function Update_rating($id)
 	{
 		global $objSmarty,$config;
 		//$uprdate = $_REQUEST['ratingdate'];
@@ -111,7 +111,7 @@ class Login extends MysqlFns
 		$tempvar = " UPDATE rating SET RatingDate= '$uprdate ',
 					 ResourceID = '$upresid',
 					 CodeID =(SELECT ID FROM code WHERE Code='$upcodeid'),
-					 Notes='$upnotes' WHERE RatingID ='$Id'";
+					 Notes='$upnotes' WHERE RatingID ='$id'";
 		$this->ExecuteQuery($tempvar, "update");
 		header("location:rating.php?successmsg=1");// redirecting
 	}	

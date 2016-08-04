@@ -16,8 +16,8 @@ class Admin extends MysqlFns
 	function Admin_newuser()
 	{
 		global $objSmarty;
-		$newAd_name= $_POST['Admin_name'];
-		$newAd_pass = $_POST['Admin_password'];
+		$newAd_name= $_POST['admin_text'];
+		$newAd_pass = $_POST['admin_password'];
 		$select="select * from admin where Username = '".$newAd_name."'";
 		$count=$this->ExecuteQuery($select,'norows');// If the Resource initial is not in the table
 			if($count == 0)//the count will be 0 so insert query will happen --- otherwise dont insert ---
@@ -30,4 +30,54 @@ class Admin extends MysqlFns
 			}
 		
 	}
+	
+	function show_adminuser()
+	{
+		global $objSmarty;
+		$newRs_name= $_POST['admin_text'];
+		$newRs_init = $_POST['admin_password'];
+		$dis_res = "select * from admin";
+		$res =$this->ExecuteQuery($dis_res,'select');
+		$objSmarty->assign('showval',$res);
+	}
+	
+	function Update_rating($Id)
+	{
+		global $objSmarty,$config;
+		//$uprdate = $_REQUEST['ratingdate'];
+		$upresid = $_REQUEST['ad_txt'];
+		$upnotes=$_REQUEST['ad_pass'];	
+		// update details into Rating Table
+		$tempvar = " UPDATE admin SET Username = '$upresid ',Password = '$upnotes'";
+		$this->ExecuteQuery($tempvar, 'update');
+		header("location:admin.php?successmsg=1");// redirecting
+	}
+	
+	function getAdminbyId($id)
+	{
+		global $objSmarty,$config;
+		//Get the details from table for edit option
+		echo $tempdisvar= "SELECT * FROM admin where ID= ' $id'";
+		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
+		$objSmarty->assign('adminDetails', $displaydet);
+	}
+	
+	function Admin_updateuser($id)
+	{
+		global $objSmarty,$config;
+		$upusername = $_REQUEST['admin_text'];
+		$uppassword = $_REQUEST['admin_password'];
+		$tempvar = "UPDATE admin SET Username = '$upusername', Password='$uppassword' where ID = '$id'";
+		$this->ExecuteQuery($tempvar ,"update");
+		header("location:admin.php?successmsg=1");//redirect
+	}
+	function del_adusers($id)
+	{
+		global $objSmarty,$config;
+		//Delete the corresponding record from rating table 
+		$tempdrop = "DELETE FROM admin WHERE ID ='$id'";
+		$this->ExecuteQuery($tempdrop, "delete");
+		header("location:admin.php?successmsg=2");// redirecting
+	}
+
 }
