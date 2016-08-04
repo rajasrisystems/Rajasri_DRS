@@ -36,7 +36,7 @@ function myFunction()
   <div id="center-column">
     <div class="top-bar-header">
 		<h1>Resource</h1>
-		<div class="breadcrumbs"><a href="controlpanel.php" >Homepage</a> >> Resource Management</div>
+		<div class="breadcrumbs"><a href="controlpanel.php" >Homepage</a> >> Admin Management</div>
 		</div>
 		<br/>
 		<div class = "manage-grid">
@@ -60,18 +60,18 @@ function myFunction()
 				
 				 
 				<!---- Resource Name Text Box ---->
-				<td width="10%" nowrap="nowrap" style="text-align:right;">Resource Name:</td>
-				<td width="5%"><input type ="text" id="rs_txt" name = "resource_text" value="{$resourceDetails.0.ResourceName}"></td>
+				<td width="10%" nowrap="nowrap" style="text-align:right;">User Name:</td>
+				<td width="5%"><input type ="text" id="rs_txt" name = "resource_text" value="{$adminDetails.0.Username}"></td>
 				
 				<!---- Resource Initial Text ---->
 				
-				<td width="10%" nowrap="nowrap" style="text-align:right;">Resource Initial:</td>
-				<td width="5%"><input type ="text" id="rs_ini" name = "resource_initial" value="{$resourceDetails.0.ResourceInitial}" ></td>
+				<td width="10%" nowrap="nowrap" style="text-align:right;">Password:</td>
+				<td width="5%"><input type ="text" id="rs_ini" name = "resource_initial" value="{$adminDetails.0.Password}" ></td>
 				
 				<!---- Submit Button ---->
 				
 				<td width="10%" nowrap="nowrap" style="text-align:right;"></td>
-				<td width="5%"><input type ="submit" id="rs_btn" name = "resource_button" value="Submit" onsubmit="validate_rs()"></td>
+				<td width="5%"><input type ="submit" id="rs_btn" name = "resource_button" value="Submit"></td>
 
                
 	        </tr>
@@ -81,9 +81,7 @@ function myFunction()
 				<!--- <th colspan="6" style="text-align:left"> Admin Username List </th> -->
 				<tr>&nbsp;</tr>
 					<th width="8%">S.No.</th>
-					<th width="8%">Resource Name</th>
-					<th width="8%">Resource Initial</th>
-					<th width="8%">Action</th>
+					<th width="8%">Admin User</th>
 				</tr>
 					{assign var=number value=1}
 					{section name=R loop=$showres}
@@ -92,9 +90,9 @@ function myFunction()
 					<td>{$showres[R].ResourceName}</td>
 					<td>{$showres[R].ResourceInitial}</td>
 					<td style="padding:8px"><a href="#">
-						<a href="resource.php?Rs_Id={$showres[R].ID}"> <img src="img/b_edit.png"></a>&nbsp;&nbsp;
-						<a href="ad_drop.php?Del_Id={$showres[R].ID}"><img src="img/b_drop.png" onclick="return myFunction();" ></a>
-							<!-- <input type="hidden" name="delvar" id="delvar" value="{$displaydet[i].RatingID}"> -->
+						<a href="resource.php?Rs_Id={$showval[U].ID}"> <img src="img/b_edit.png">{$showval[U].ID}</a>&nbsp;&nbsp;
+						<a href="ad_drop.php?Del_Id={$showval[U].ID}"><img src="img/b_drop.png" onclick="return myFunction();" ></a>
+							<input type="hidden" name="delvar" id="delvar" value="{$displaydet[i].RatingID}">
 					</td>
 				</tr>
 					{sectionelse}

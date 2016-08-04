@@ -13,6 +13,7 @@
 
 function loginSubmit()
 {
+	var pass_val  = /[\W_]/;
 	if(document.getElementById('username').value=='')
 	{
 		document.getElementById('errmsg').innerHTML='Please enter username';
@@ -23,6 +24,13 @@ function loginSubmit()
 	{
 		document.getElementById('errmsg').innerHTML='Please enter password';
 		document.getElementById('password').focus();
+		return false;
+	}
+	var pwd=document.getElementById('password');
+	if(pass_val.test(pwd.value))
+	{
+		
+		document.getElementById('errmsg').innerHTML = "Password must not contain special characters!";
 		return false;
 	}
 	document.getElementById('hdAction').value=1;

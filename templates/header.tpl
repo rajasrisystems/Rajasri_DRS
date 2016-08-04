@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<link rel="stylesheet" href="css/all.css">
+	<script src="js/jquery-latest.js"></script>
 </head>
 <!--Design Prepared by Rajasri Systems-->   
 <body>
