@@ -2,21 +2,41 @@
 <script type="text/javascript">
 function validate_rs()
 {
+	var spl_char = /[\W_]/;
 	if(document.getElementById('rs_txt').value == "")
 	{
 		
-		document.getElementById('errmsg1').innerHTML = 'Please enter resource name!';
+		document.getElementById('errmsg1').innerHTML = 'Please enter resource name';
 		document.getElementById('rs_txt').focus();
 		return false;
 	}
+	
+		
+	
 	if(document.getElementById('rs_ini').value =="")
 	{
-		document.getElementById('errmsg1').innerHTML = 'Please enter resource initials!';
+		document.getElementById('errmsg1').innerHTML = 'Please enter resource initials';
 		document.getElementById('rs_ini').focus();
 		return false;
 	}
-	document.getElementById("hdAction").value='1';
-	return true;
+	
+	var rsin = document.getElementById('rs_ini').value;
+	if(spl_char.test(rsin))
+	{
+		
+		document.getElementById('errmsg1').innerHTML = 'Special characters not allowed';
+		return false;
+	}
+	
+	if(document.getElementById('ResID').value=='')
+	{
+		document.getElementById("hdAction").value='1';
+		return true;
+	}else{
+		document.getElementById("updateAction").value='1';
+		return true;
+	}
+	
 }
 function myFunction() 
 	{
@@ -30,13 +50,15 @@ function myFunction()
 			return false; 		
 	   	}
 	}
+
+
 </script>
 {/literal}
 <div id="middle"> 
   <div id="center-column">
     <div class="top-bar-header">
 		<h1>Resource</h1>
-		<div class="breadcrumbs"><a href="controlpanel.php" >Homepage</a> >> Resource Management</div>
+		<div class="breadcrumbs"><a href="controlpanel.php" >Homepage</a> >> Resource</div>
 		</div>
 		<br/>
 		<div class = "manage-grid">
@@ -44,7 +66,12 @@ function myFunction()
 		
 			<div class="report-page" style="text-align:left;">
 				<form action="" name="rptpage" method="post" onsubmit ="return validate_rs();">
-				<input type="hidden" id="hdAction" name="hdAction" value="">
+				<input type="hidden" id="hdAction" name="hdAction" value=""> 
+				
+				<input type="hidden" id="ResID" name="ResID" value="{$smarty.request.Rs_Id}">   <!--- used for taking the temp value/data which is not going to store in db
+																										/show to user-this will store and display-->
+				<input type="hidden" id="updateAction" name="updateAction" value="">
+				
 				<table border="0" cellpadding="0" cellspacing="0" class="grid-table">
 				<th colspan="9" style="text-align:left">Resource</th>
 				<tr>
@@ -52,8 +79,8 @@ function myFunction()
 					<div class="Error" align="center" id="errmsg1"></div>
 					<div class="Error" align="center" id="errmsg1">{$ErrorMessage}</div>
 					<div class="success" align="center" id="errmsg">{$SuccessMessage}</div>
-					<div class="success">{if $smarty.request.successmsg eq 1} User data updated successfully {/if}</div>
-					<div class="success">{if $smarty.request.successmsg eq 2}User data deleted successfully {/if}
+					<div class="success">{if $smarty.request.successmsg eq 1}Resource details updated successfully {/if}</div>
+					<div class="success">{if $smarty.request.successmsg eq 2}Resource details deleted successfully {/if}
 				</td>
 				</tr>
 			<tr style="border-bottom:none;">
@@ -66,7 +93,7 @@ function myFunction()
 				<!---- Resource Initial Text ---->
 				
 				<td width="10%" nowrap="nowrap" style="text-align:right;">Resource Initial:</td>
-				<td width="5%"><input type ="text" id="rs_ini" name = "resource_initial" value="{$resourceDetails.0.ResourceInitial}" ></td>
+				<td width="5%"><input type ="text" id="rs_ini" name = "resource_initial" value="{$resourceDetails.0.ResourceInitial}" onkeyup ="caps()" ></td>
 				
 				<!---- Submit Button ---->
 				
@@ -80,7 +107,7 @@ function myFunction()
 			<table border="0" cellpadding="2" cellspacing="0" class="grid-table">
 				<!--- <th colspan="6" style="text-align:left"> Admin Username List </th> -->
 				<tr>&nbsp;</tr>
-					<th width="8%">S.No.</th>
+					
 					<th width="8%">Resource Name</th>
 					<th width="8%">Resource Initial</th>
 					<th width="8%">Action</th>
@@ -88,12 +115,12 @@ function myFunction()
 					{assign var=number value=1}
 					{section name=R loop=$showres}
 				<tr>
-					<td>{$number++}</td>
-					<td>{$showres[R].ResourceName}</td>
-					<td>{$showres[R].ResourceInitial}</td>
+					
+					<td align="left" class="fcaps">{$showres[R].ResourceName}</td>
+					<td>{$showres[R].ResourceInitial|upper}</td>
 					<td style="padding:8px"><a href="#">
 						<a href="resource.php?Rs_Id={$showres[R].ID}"> <img src="img/b_edit.png"></a>&nbsp;&nbsp;
-						<a href="ad_drop.php?Del_Id={$showres[R].ID}"><img src="img/b_drop.png" onclick="return myFunction();" ></a>
+						<a href="rs_drop.php?Del_Id={$showres[R].ID}"><img src="img/b_drop.png" onclick="return myFunction();" ></a>
 							<!-- <input type="hidden" name="delvar" id="delvar" value="{$displaydet[i].RatingID}"> -->
 					</td>
 				</tr>

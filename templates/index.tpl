@@ -4,6 +4,7 @@
 	<title>Rajasri DRS</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<link rel="SHORTCUT ICON" href="img/rajasri.jpeg">
 	<link rel="stylesheet" href="css/all.css">
 </head>
 <!--Design Prepared by Rajasri Systems-->   

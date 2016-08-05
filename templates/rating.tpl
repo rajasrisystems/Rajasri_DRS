@@ -1,6 +1,4 @@
-<html>
-<head>
-	{literal}
+{literal}
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
  	<link rel="stylesheet" href="/resources/demos/style.css">
   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -11,16 +9,27 @@
 	<script>
 	$( function() {$( "#ratingdate" ).datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate", new Date());});
 	jQuery(document).ready(function($){
-	$("#code").autocomplete({
-	source: function(request, response) {
-	$.ajax({
-		url: "get_code.php",
-	        data: {  term: $("#code").val()},
-	        dataType: "json",
-	        type: "GET",
-	        success: function(data){response(data);}
-		      });},scroll:true
+		$("#code").autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					url: "get_code.php",
+				        data: {  term: $("#code").val()},
+				        dataType: "json",
+				        type: "GET",
+				        success: function(data){
+							response(data);
+						}
+				});
+		    },scroll:true
 		});
+		/*$("#code").on('change mouseover focusIn', function(){
+			var val=this.value;
+			valArr=val.split('-');
+			if(valArr[1]!=''){
+				document.getElementById("code").value=valArr[0].trim();
+				document.getElementById("notes").value=valArr[1].trim();
+			}
+		});*/
 	});
 	function validfield()
 	{
@@ -64,10 +73,60 @@
 			return false; 		
 	   	}
 	}
+	function sortsub1()
+	{
+	if((document.getElementById('sortflag').value!="1")&&(document.getElementById('sortflag').value!="2"))
+	{
+		flag=2;
+	}else if(document.getElementById('sortflag').value=="1")
+	{
+		flag=2;
+	}
+	else if(document.getElementById('sortflag').value=="2")
+	{
+		flag=1;
+	}	
+	FormName = document.del_form;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}
+	function sortsub2()
+	{
+	if((document.getElementById('sortflag').value!="3")&&(document.getElementById('sortflag').value!="4"))
+	{
+		flag=4;
+	}else if(document.getElementById('sortflag').value=="3")
+	{
+		flag=4;
+	}
+	else if(document.getElementById('sortflag').value=="4")
+	{
+		flag=3;
+	}	
+	FormName = document.del_form;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}
+	function sortsub3()
+	{
+	if((document.getElementById('sortflag').value!="5")&&(document.getElementById('sortflag').value!="6"))
+	{
+		flag=6;
+	}else if(document.getElementById('sortflag').value=="5")
+	{
+		flag=6;
+	}
+	else if(document.getElementById('sortflag').value=="6")
+	{
+		flag=5;
+	}	
+	FormName = document.del_form;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}
 	</script>
 	{/literal}
-</head>
-<body>
+
 <div id="wrapper">
 <div style="clear:both;"></div>
 <div id="middle"> 
@@ -114,7 +173,7 @@
 	                        	</td>
 					<td style="text-align:right;border-bottom:none; vertical-align:top">Notes:</td>
 					<td style="text-align:left;border-bottom:none;">
-						<textarea rows="3" cols="40" name="notes">{if $getRating.0.Notes neq '-'}{$getRating.0.Notes}{else} {/if}</textarea>
+						<textarea rows="3" cols="40" id="notes" name="notes">{if $getRating.0.Notes neq '-'}{$getRating.0.Notes}{else} {/if}</textarea>
 					</td>
 					<tr style="border-bottom:none;">
 					<td colspan="8"> 		
@@ -126,18 +185,23 @@
 		<div class="submit"></div>
 	 	<form name="del_form" id="del_form" method="post" >
 		<input type="hidden" name="delaction" id="delaction">
+		<input type="hidden" name="sortflag" id="sortflag" value="{$smarty.request.sortflag}">
 		<table border="0" cellpadding="2" cellspacing="0" class="grid-table">
-			<th colspan="6" style="text-align:left"> Report </th>
+			<th colspan="7" style="text-align:left"> Report </th>
 			<tr>&nbsp;</tr>
-			<th width="8%">S.No.</th>
-			<th width="8%">Resource</th>
-			<th width="12%">Code</th>
-			<th> Notes </th>
+			<th width="8%">
+			<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub1();">Resource</span>
+			</th>
+			<th width="12%">
+			<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub2();">Code</span>
+			</th>
+			<th><span style="cursor: pointer; text-decoration: underline;" onclick="sortsub3();">Notes</span>  
+			</th>
 			<th width="12%">Action</th> 
 			{assign var=number value=1}
 			  {section name=i loop=$displaydet}
 			   <tr>
-				<td>{$number++}</td>
+
 				<td>{$displaydet[i].ResourceInitial}</td>
 				<td>{$displaydet[i].Code}</td>
 				<td  style="text-align:left">{if $displaydet[i].Notes neq ''}{$displaydet[i].Notes}{else} - {/if} </td>
@@ -157,5 +221,3 @@
   </div>
 </div>
 </div>	
-</body>
-</html>

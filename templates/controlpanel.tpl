@@ -19,7 +19,7 @@
 			</div>	
 			<div class="leftcolumn">
 				<div class="stroke" align="center"> 
-				<a href="resource.php"><img src="img/resource.png" border="0" width="56" height="56" /></a><br />
+				<a href="resource.php"><img src="img/resources.png" border="0" width="56" height="56" /></a><br />
 				<a href="resource.php" class="adminlink"><span>Resource Management</span></a> </div>
 			</div>
 			<div class="leftcolumn">
