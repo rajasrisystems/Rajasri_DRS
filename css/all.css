@@ -71,7 +71,7 @@ body {
 	text-align:center;
 }
 .listing-table td{
-	color:#acacac;
+	color:#000;
 	font-size:14px;
 }
 .listing-table .textbox{
@@ -81,7 +81,7 @@ body {
 	color:#acacac;
 }
 .forgot{
-	color: #acacac;
+	color: #000;
 	font-size:12px;
 	text-decoration:none;
 }
@@ -262,6 +262,7 @@ textarea
 }
 .report-page{
 	align-items: center;
+	
 }
 .overall-report{
 	
@@ -286,3 +287,14 @@ textarea
      font-size:12px;
 }
 
+#rs_txt{
+	text-transform: capitalize;
+}
+
+.loggedUser{
+	float:right;
+	color:#A0A0A0;
+	padding:14px;
+	font-size:14px; 
+	font-weight:bold;
+}
