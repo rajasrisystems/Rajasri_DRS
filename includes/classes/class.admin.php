@@ -24,24 +24,44 @@ class Admin extends MysqlFns
 			{
 				$ad_insrt = "INSERT INTO admin(Username, Password)values('".trim(addslashes($newAd_name))."','".$newAd_pass."')";
 				$inst_var = $this->ExecuteQuery($ad_insrt,'insert');
-				$objSmarty->assign("SuccessMessage", "Username added successfully");
+				$objSmarty->assign("SuccessMessage", "Admin details added successfully");
 			}else{
-				$objSmarty->assign("ErrorMessage", "Username already exists");
+				$objSmarty->assign("ErrorMessage", "Admin details already exists");
 			}
 		
 	}
+	
+	function Admin_updateuser($id)
+	{
+		global $objSmarty,$config;
+		$upusername = $_REQUEST['admin_text'];
+		$uppassword = $_REQUEST['admin_password'];
+		$select="select * from admin where Username = '".$upusername."'";
+		$count=$this->ExecuteQuery($select,'norows');
+		if($count == 0)//the count will be 0 so insert query will happen --- otherwise dont insert ---
+			{
+				$tempvar = "UPDATE admin SET Username = '$upusername', Password='$uppassword' where ID = '$id'";
+				$count = $this->ExecuteQuery($tempvar ,'update');
+				$objSmarty->assign("SuccessMessage", "Admin details updated successfully");
+			}else
+			{
+				$objSmarty->assign("ErrorMessage", "Admin details already exists");
+			}
+		
+	}
+	
 	
 	function show_adminuser()
 	{
 		global $objSmarty;
 		$newRs_name= $_POST['admin_text'];
 		$newRs_init = $_POST['admin_password'];
-		$dis_res = "select * from admin";
+		$dis_res = "select * from admin order by Username asc";
 		$res =$this->ExecuteQuery($dis_res,'select');
 		$objSmarty->assign('showval',$res);
 	}
 	
-	function Update_rating($Id)
+	/*function Update_rating($Id)
 	{
 		global $objSmarty,$config;
 		//$uprdate = $_REQUEST['ratingdate'];
@@ -50,8 +70,8 @@ class Admin extends MysqlFns
 		// update details into Rating Table
 		$tempvar = " UPDATE admin SET Username = '$upresid ',Password = '$upnotes'";
 		$this->ExecuteQuery($tempvar, 'update');
-		header("location:admin.php?successmsg=1");// redirecting
-	}
+		$objSmarty->assign("SuccessMessage", "Admin details updated successfully");
+	}*/
 	
 	function getAdminbyId($id)
 	{
@@ -62,15 +82,7 @@ class Admin extends MysqlFns
 		$objSmarty->assign('adminDetails', $displaydet);
 	}
 	
-	function Admin_updateuser($id)
-	{
-		global $objSmarty,$config;
-		$upusername = $_REQUEST['admin_text'];
-		$uppassword = $_REQUEST['admin_password'];
-		$tempvar = "UPDATE admin SET Username = '$upusername', Password='$uppassword' where ID = '$id'";
-		$this->ExecuteQuery($tempvar ,"update");
-		header("location:admin.php?successmsg=1");//redirect
-	}
+	
 	function del_adusers($id)
 	{
 		global $objSmarty,$config;

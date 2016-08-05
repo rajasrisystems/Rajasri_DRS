@@ -24,9 +24,10 @@ class Resource extends MysqlFns
 			{
 				$rs_insrt = "INSERT INTO resource(ResourceName, ResourceInitial)values('".$newRs_name."','".$newRs_Init."')";
 				$inst_var = $this->ExecuteQuery($rs_insrt,'insert');
-				$objSmarty->assign("SuccessMessage", "Resource inserted successfully");
+				$objSmarty->assign("SuccessMessage", "Resource details inserted successfully");
 			}else{
-				$objSmarty->assign("ErrorMessage", "Resource initial already exists!");
+				$objSmarty->assign("ErrorMessage", "Resource initial already exist");
+				$objSmarty->assign("ErrorMessage", "Resource initial already exist");
 			}
 		
 		
@@ -37,7 +38,7 @@ class Resource extends MysqlFns
 		global $objSmarty;
 		$newRs_name= $_POST['resource_text'];
 		$newRs_init = $_POST['resource_initial'];
-		$dis_res = "select * from resource";
+		$dis_res = "select * from resource order by ResourceName asc";
 		$res =$this->ExecuteQuery($dis_res,'select');
 		$objSmarty->assign('showres',$res);
 	}
@@ -51,13 +52,33 @@ class Resource extends MysqlFns
 		$objSmarty->assign('resourceDetails', $displaydet);
 	}
 	
-	function del_adusers($id)
+	function del_rsusers($id)
 	{
 		global $objSmarty,$config;
 		//Delete the corresponding record from rating table 
-		$tempdrop = "DELETE FROM admin WHERE ID ='$id'";
+		$tempdrop = "DELETE FROM resource WHERE ID ='$id'";
 		$this->ExecuteQuery($tempdrop, "delete");
 		header("location:resource.php?successmsg=2");// redirecting
+	}
+	function Resource_update($id)
+	{
+		global $objSmarty,$config;
+		$upresname = $_REQUEST['resource_text'];
+		$upresinit = $_REQUEST['resource_initial'];
+		$select="select * from resource where ResourceInitial = '".$upresinit."'";
+		$count=$this->ExecuteQuery($select,'norows');// If the Resource initial is not in the table
+		//header("location:resource.php?successmsg=1");//redirect
+		if($count == 0)//the count will be 0 so insert query will happen --- otherwise dont insert ---
+			{
+				$tempvar = "UPDATE resource SET ResourceName = '$upresname', ResourceInitial='$upresinit' where ID = '$id'";
+				$count=$this->ExecuteQuery($tempvar ,"update");
+				$objSmarty->assign("SuccessMessage", "Resource details updated successfully");
+			}else{
+				$objSmarty->assign("ErrorMessage", "Resource details already exist");
+				
+			}
+		
+		
 	}
 		
 }	

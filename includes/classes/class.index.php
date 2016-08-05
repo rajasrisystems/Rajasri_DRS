@@ -73,9 +73,39 @@ class Login extends MysqlFns
 	function display()
 	{
 		global $objSmarty,$config;
+		$orderBy='';
+		echo '1';
+		if(isset($_REQUEST['sortflag']) && $_REQUEST['sortflag']!='')
+		{
+			if($_REQUEST['sortflag']=='1')
+			{
+				$orderBy.="order by ResourceInitial asc";
+			}
+			elseif($_REQUEST['sortflag']=="2")
+			{
+				$orderBy.="order by ResourceInitial desc";
+			}
+			elseif($_REQUEST['flag']=='3'){
+				$orderBy.="order by Code asc";
+			}
+			elseif($_REQUEST['flag']=='4'){
+				$orderBy.="order by Code desc";
+			}
+			elseif($_REQUEST['flag']=='5'){
+				$orderBy.="order by Notes asc";
+			}
+			elseif($_REQUEST['flag']=='6'){
+				$orderBy.="order by Notes desc";
+			}
+		}
+		else
+		{
+			$orderBy.="order by ResourceInitial asc";
+		}
 		// Displays the records of current date 
 		$datetemp = date("y/m/d");  
-		$tempdisvar= "SELECT * FROM rating r,resource re,code c WHERE r.ResourceID=re.ID and r.CodeID=c.ID and r.RatingDate=' $datetemp' ";
+		
+		$tempdisvar= "SELECT * FROM rating r,resource re,code c WHERE r.ResourceID=re.ID and r.CodeID=c.ID and r.RatingDate=' $datetemp' $orderBy";
 		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
 		$objSmarty->assign('displaydet', $displaydet);
 	}
