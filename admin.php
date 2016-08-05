@@ -6,9 +6,9 @@
 	{
 		$objAdmin -> Admin_newuser();
 	}
-	if($_REQUEST['Admin_updateuser']=='1')
+	if($_REQUEST['updateAction']=='1')
 	{
-		$objAdmin->Admin_updateuser($_REQUEST['adminId']);
+		$objAdmin->Admin_updateuser($_REQUEST['AdminID']);
 	}
 	if($_REQUEST['Ad_Id']!='')
 	{

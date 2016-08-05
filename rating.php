@@ -17,7 +17,7 @@
 		$objLogin->get_RatingID($_REQUEST['Rat_Id']);
 	}
 	$objLogin->display();
-	$disvar = "SELECT * FROM resource";
+	$disvar = "SELECT * FROM resource order by ResourceInitial asc";
 	$result = mysql_query($disvar) OR die(mysql_error());
 	while($row = mysql_fetch_assoc($result))
 		{

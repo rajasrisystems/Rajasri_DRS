@@ -13,7 +13,7 @@
 	$objSmarty->assign('currentYear', date('Y'));
 	$objLogin->chklogin();
 	$objReport = new Report();
-	$disvar = "SELECT * FROM resource";
+	$disvar = "SELECT * FROM resource order by ResourceInitial asc";
 	$result = mysql_query($disvar) OR die(mysql_error());
 	while($row = mysql_fetch_assoc($result))
 		{

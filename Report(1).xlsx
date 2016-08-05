@@ -1,0 +1,36 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Sheet0</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table><tr>
+				<th>S.No.</th>
+				<th>Resource</th>
+				<th>Beginning Rate</th>
+				<th>End Rate</th>
+			</tr><tr>
+				<td>1</td>
+				<td>SN</td>
+				<td>54.84</td>
+				<td>74</td>
+			</tr><tr>
+				<td>2</td>
+				<td>TK</td>
+				<td>50</td>
+				<td>52</td>
+			</tr><tr>
+				<td>3</td>
+				<td>TG</td>
+				<td>51.29</td>
+				<td>60</td>
+			</tr><tr>
+				<td>4</td>
+				<td>MA</td>
+				<td>50</td>
+				<td>60</td>
+			</tr><tr>
+				<td>5</td>
+				<td>HS</td>
+				<td>50</td>
+				<td>56</td>
+			</tr><tr>
+				<td>6</td>
+				<td>BR</td>
+				<td>50</td>
+				<td>56</td>
+			</tr></table></body></html>

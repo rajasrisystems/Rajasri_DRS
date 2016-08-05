@@ -7,9 +7,9 @@
 	{
 		$objResource -> ResourceAdding();
 	}
-	if($_REQUEST['Admin_updateuser']=='1')
+	if($_REQUEST['updateAction']=='1') // 'updateAction'---> hidden id
 	{
-		$objResource->Admin_updateuser($_REQUEST['adminId']);
+		$objResource->Resource_update($_REQUEST['ResID']); // Resource_update --> Update Function: ResID -->Hidden ID
 	}
 	if($_REQUEST['Rs_Id']!='')
 	{
