@@ -1,3 +1,20 @@
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery-latest.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.27.2/js/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.27.2/js/jquery.tablesorter.widgets.js"></script> 
+<script type="text/javascript">
+	$(function() {
+
+  $("#exporttable").tablesorter({ theme : 'blue' });
+
+  
+
+    return false;
+  });
+
+});
+</script>
 <?php
 include "includes/common.php";
 include_once "includes/classes/class.report.php";
@@ -133,7 +150,7 @@ if($_REQUEST['resource'] != '' &&  $_REQUEST['resource'] == '2')
 	}
 	echo '<table id="exporttable" border="0" cellpadding="2" cellspacing="0" class="grid-table">
 			<tr>
-				<th>Date</th>
+				<th><span style="cursor: pointer; text-decoration: underline;" onclick="sortsub1();">Date</span></th>
 				<th>Change</th>
 				<th>Rating</th>
 				<th>Notes</th>

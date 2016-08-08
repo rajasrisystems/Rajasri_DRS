@@ -20,14 +20,6 @@
 			$data[] = $row; // store in array	
 		}
 	$objSmarty->assign('tabresdata', $data);	
-	/*if($_REQUEST['dataction']='1')
-	{
-	$objReport->allresource();
-	}	
-	if($_REQUEST['singlerestemp']='1')
-	{
-	$objReport->oneresource();
-	}*/
 	$objSmarty->assign('activePage',"3");
 	$objSmarty->assign('IncludeTpl',"report.tpl");
 	$objSmarty->display("pagetemplate.tpl");
