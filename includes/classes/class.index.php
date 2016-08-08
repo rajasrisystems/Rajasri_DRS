@@ -23,6 +23,7 @@ class Login extends MysqlFns
 		if($Count > 0)
 		{
 			session_start();
+			$_SESSION['Name']=$sle[0]['Name'];
 			$_SESSION['Username']=$sle[0]['Username'];
 			$_SESSION['UserId']=$sle[0]['ID'];
 			$_SESSION['session_id']=session_id();
@@ -70,11 +71,10 @@ class Login extends MysqlFns
 		header("location:rating.php?successmsg=3");// redirecting
 		}		
 	}
-	function display()
+	/*function display()
 	{
 		global $objSmarty,$config;
 		$orderBy='';
-		echo '1';
 		if(isset($_REQUEST['sortflag']) && $_REQUEST['sortflag']!='')
 		{
 			if($_REQUEST['sortflag']=='1')
@@ -85,16 +85,16 @@ class Login extends MysqlFns
 			{
 				$orderBy.="order by ResourceInitial desc";
 			}
-			elseif($_REQUEST['flag']=='3'){
+			elseif($_REQUEST['sortflag']=='3'){
 				$orderBy.="order by Code asc";
 			}
-			elseif($_REQUEST['flag']=='4'){
+			elseif($_REQUEST['sortflag']=='4'){
 				$orderBy.="order by Code desc";
 			}
-			elseif($_REQUEST['flag']=='5'){
+			elseif($_REQUEST['sortflag']=='5'){
 				$orderBy.="order by Notes asc";
 			}
-			elseif($_REQUEST['flag']=='6'){
+			elseif($_REQUEST['sortflag']=='6'){
 				$orderBy.="order by Notes desc";
 			}
 		}
@@ -104,11 +104,12 @@ class Login extends MysqlFns
 		}
 		// Displays the records of current date 
 		$datetemp = date("y/m/d");  
-		
+		$lastdays = (date("Y-m-d"),strtotime("-30days"));
+		//$lastdays = ($datetemp("Y-m-d"),strtotime("-30 days");
 		$tempdisvar= "SELECT * FROM rating r,resource re,code c WHERE r.ResourceID=re.ID and r.CodeID=c.ID and r.RatingDate=' $datetemp' $orderBy";
 		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
 		$objSmarty->assign('displaydet', $displaydet);
-	}
+	}*/
 	function deleterow($id)
 	{
 		global $objSmarty,$config;

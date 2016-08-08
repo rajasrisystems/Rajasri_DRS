@@ -36,9 +36,33 @@ class Resource extends MysqlFns
 	function show_resource()
 	{
 		global $objSmarty;
+		$orderBy='';
+		if(isset($_REQUEST['sortflag']) && $_REQUEST['sortflag']!='')
+		{
+			if($_REQUEST['sortflag']=='1')
+			{
+				$orderBy.="order by  ResourceName asc";
+			}
+			elseif($_REQUEST['sortflag']=="2")
+			{
+				$orderBy.="order by  ResourceName desc";
+			}
+			elseif($_REQUEST['sortflag']=='3')
+			{
+				$orderBy.="order by ResourceInitial asc";
+			}
+			elseif($_REQUEST['sortflag']=='4')
+			{
+				$orderBy.="order by ResourceInitial desc";
+			}
+		}
+		else
+		{
+			$orderBy.="order by  ResourceName asc";
+		}
 		$newRs_name= $_POST['resource_text'];
 		$newRs_init = $_POST['resource_initial'];
-		$dis_res = "select * from resource order by ResourceName asc";
+		$dis_res = "select * from resource $orderBy";
 		$res =$this->ExecuteQuery($dis_res,'select');
 		$objSmarty->assign('showres',$res);
 	}
@@ -46,12 +70,12 @@ class Resource extends MysqlFns
 	function getResourcebyId($id)
 	{
 		global $objSmarty,$config;
+		
 		//Get the details from table for edit option
-		$tempdisvar= "SELECT * FROM resource where ID= ' $id'";
+		$tempdisvar= "SELECT * FROM resource where ID= '$id'";
 		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
 		$objSmarty->assign('resourceDetails', $displaydet);
 	}
-	
 	function del_rsusers($id)
 	{
 		global $objSmarty,$config;
