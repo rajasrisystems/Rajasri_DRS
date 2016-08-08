@@ -1,20 +1,3 @@
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-<script type="text/javascript" src="js/jquery-latest.js"></script> 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.27.2/js/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.27.2/js/jquery.tablesorter.widgets.js"></script> 
-<script type="text/javascript">
-	$(function() {
-
-  $("#exporttable").tablesorter({ theme : 'blue' });
-
-  
-
-    return false;
-  });
-
-});
-</script>
 <?php
 include "includes/common.php";
 include_once "includes/classes/class.report.php";
@@ -150,10 +133,11 @@ if($_REQUEST['resource'] != '' &&  $_REQUEST['resource'] == '2')
 	}
 	echo '<table id="exporttable" border="0" cellpadding="2" cellspacing="0" class="grid-table">
 			<tr>
-				<th><span style="cursor: pointer; text-decoration: underline;" onclick="sortsub1();">Date</span></th>
+				<th>Date</th>
 				<th>Change</th>
 				<th>Rating</th>
 				<th>Notes</th>
+				<th>Manager Name</th>
 			</tr>  ';
 	$c=0;
 	$today=date('Y-m-d');
@@ -210,7 +194,6 @@ if($_REQUEST['resource'] != '' &&  $_REQUEST['resource'] == '2')
 				}
 			
 				$newcodevar[]=$exe_res[0]['CodeID'];
-			//print_r($newcodevar);
 				/* $codeId=$exe_res[0]['CodeID'];
 				$selectChange="select * from code where ID='".$codeId."'";
 				$exeChange=$objReport->ExecuteQuery($selectChange, "select");
@@ -222,14 +205,17 @@ if($_REQUEST['resource'] != '' &&  $_REQUEST['resource'] == '2')
 					<td>'.$change.' </td>
 					<td>'.$newPoint .'</td>
 					<td>'.$exe_res[0]['Notes'].'</td>
+					<td>'.$objReport->getuserbyId($exe_res[0]['CreatedBy']).'</td>
 				</tr>';
 			}else{
 				$pointsArr[]=$begin_points;
 				echo '<tr>
 					<td>'.date("d/m/Y",strtotime($date)).'</td>
 					<td>&nbsp;</td>
-					<td>'.$begin_points .'</td>
+					<td>'.$begin_points .'
+					</td>
 					<td>'.$exe_res[0]['Notes'].'</td>
+					<td>'.$objReport->getuserbyId($exe_res[0]['CreatedBy']).'</td>
 				</tr>';
 			}
 		}
@@ -237,7 +223,11 @@ if($_REQUEST['resource'] != '' &&  $_REQUEST['resource'] == '2')
 	$average=round((array_sum($pointsArr))/$noofdays,2);
 	echo'<tr>
 				<td colspan="2"><b>Average</b></td>
-				<td><b>'.$average.'</b></td>
+				<td><b>'.$average.'</b>
+				<input type="hidden" text="avg_rate" id="avg_rate" value="'.$average.'">
+				<input type="hidden" text="beginpoints" id="beginpoints" value="'.$begin_points.'">
+				</td>
+				
 				<td> </td>
 			</tr>  ';
 	echo '</table>';

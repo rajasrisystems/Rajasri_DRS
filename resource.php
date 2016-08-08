@@ -13,7 +13,7 @@
 	}
 	if($_REQUEST['Rs_Id']!='')
 	{
-		$objResource->getResourcebyId();
+		$objResource->getResourcebyId($_REQUEST['Rs_Id']); //($_REQUEST['Rs_Id']);---Passing ID as parameter;
 	}
 	$objResource->show_resource();
 	$objSmarty->assign('objReport',$objResource);
