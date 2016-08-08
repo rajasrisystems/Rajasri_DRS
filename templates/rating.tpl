@@ -1,13 +1,17 @@
 {literal}
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
- 	<link rel="stylesheet" href="/resources/demos/style.css">
-  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	<link rel="stylesheet" href="css/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ 	<link rel="stylesheet" href="/resources/demos/style.css">
+  	<script src="js/jquery-1.12.4.js"></script>
+  	<script src="js/jquery-ui.js"></script>
+	<link rel="stylesheet" href="css/jquery-ui.css">
+  	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/jquery-ui1.js"></script>
 	<script>
-	$( function() {$( "#ratingdate" ).datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate", new Date());});
+	$( function() {
+		$( "#ratingdate" ).datepicker({
+			dateFormat:"dd/mm/yy",
+			 maxDate: 0
+				}).datepicker("setDate", new Date());});
 	jQuery(document).ready(function($){
 		$("#code").autocomplete({
 			source: function(request, response) {
@@ -124,8 +128,42 @@
 	FormName.sortflag.value=flag;
 	FormName.submit();
 	}
+	function sortsub4()
+	{
+	if((document.getElementById('sortflag').value!="7")&&(document.getElementById('sortflag').value!="8"))
+	{
+		flag=8;
+	}else if(document.getElementById('sortflag').value=="7")
+	{
+		flag=8;
+	}
+	else if(document.getElementById('sortflag').value=="8")
+	{
+		flag=7;
+	}	
+	FormName = document.del_form;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}
+	function sortsub5()
+	{
+	if((document.getElementById('sortflag').value!="9")&&(document.getElementById('sortflag').value!="10"))
+	{
+		flag=10;
+	}else if(document.getElementById('sortflag').value=="9")
+	{
+		flag=10;
+	}
+	else if(document.getElementById('sortflag').value=="10")
+	{
+		flag=9;
+	}	
+	FormName = document.del_form;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}
 	</script>
-	{/literal}
+{/literal}
 
 <div id="wrapper">
 <div style="clear:both;"></div>
@@ -190,6 +228,9 @@
 			<th colspan="7" style="text-align:left"> Report </th>
 			<tr>&nbsp;</tr>
 			<th width="8%">
+				<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub4();">Date</span> 
+			</th>
+			<th width="8%">
 				<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub1();">Resource</span>
 			</th>
 			<th width="12%">
@@ -198,13 +239,18 @@
 			<th>
 				<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub3();">Notes</span>  
 			</th>
+			<th> 
+				<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub5();">Manager Name</span>
+			</th>
 			<th width="12%">Action</th> 
 			{assign var=number value=1}
 			  {section name=i loop=$displaydet}
 			   <tr>
+			    <td>{$displaydet[i].RatingDate|date_format:'%d/%m/%Y'}</td>
 				<td>{$displaydet[i].ResourceInitial}</td>
 				<td>{$displaydet[i].Code}</td>
 				<td  style="text-align:left">{if $displaydet[i].Notes neq ''}{$displaydet[i].Notes}{else} - {/if} </td>
+				<td>{$objRating->managername($displaydet[i].CreatedBy)}</td>
 				<td style="padding:8px"><a href="#">
 				<a href="rating.php?Rat_Id={$displaydet[i].RatingID}"> <img src="img/b_edit.png"></a>&nbsp;&nbsp;
 				<a href="drop.php?Del_Id={$displaydet[i].RatingID}"><img src="img/b_drop.png" onclick="return myFunction();" ></a>

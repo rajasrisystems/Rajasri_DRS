@@ -21,6 +21,6 @@
 			<li {if $activePage eq '3'}class="active"{/if}><a href="report.php" class="navigation_link">Reports</a></li>
 			<li><a href="logout.php" class="navigation_link">Logout</a></li>
 	</ul>
-	<div class="loggedUser">Welcome {$smarty.session.Name}</div>
+	<div class="loggedUser">Welcome <span style="color:#66A3FF;">{$smarty.session.Name}</span></div>
 	</div>
 

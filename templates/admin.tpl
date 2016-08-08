@@ -6,6 +6,13 @@ function validate_ad()
 {
 	
 	var spl_char = /[\W_]/;
+	if(document.getElementById('ad_fname').value == "")
+	{
+		
+		document.getElementById('errmsg1').innerHTML = 'Please enter name';
+		document.getElementById('ad_fname').focus();
+		return false;
+	}
 	if(document.getElementById('ad_txt').value == "")
 	{
 		
@@ -111,7 +118,7 @@ function sortsub2()
 			<tr style="border-bottom:none;">
 				
 				<td width="10%" nowrap="nowrap" style="text-align:right;">Name:</td>
-				<td width="5%"><input type ="text" id="ad_txt" name = "admin_fname" value="{$adminDetails.0.Name}"></td>
+				<td width="5%"><input type ="text" id="ad_fname" name = "admin_fname" value="{$adminDetails.0.Name}"></td>
 				
 				<td width="10%" nowrap="nowrap" style="text-align:right;">Username:</td>
 				<td width="5%"><input type ="text" id="ad_txt" name = "admin_text" value="{$adminDetails.0.Username}"></td>
@@ -139,7 +146,7 @@ function sortsub2()
 				</tr>
 					{section name=R loop=$showval}
 				<tr>
-					<td>{$showval[R].Name}</td>
+					<td  style="text-align:left">{$showval[R].Name}</td>
 					<td>{$showval[R].Username|upper}</td>
 					<td style="padding:8px"><a href="#">
 						<a href="admin.php?Ad_Id={$showval[R].ID}"> <img src="img/b_edit.png"></a>&nbsp;&nbsp;

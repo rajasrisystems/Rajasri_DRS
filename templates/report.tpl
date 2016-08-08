@@ -1,28 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 {literal}
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="js/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	<link rel="stylesheet" href="css/jquery-ui.css">
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script type="text/javascript" src="/path/to/jquery-latest.js"></script> 
-	<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
 <script>
 function tbl_view()
 	{
-		/*if(document.getElementById('month').value=='')
-		{
-			alert('Please select month');
-			document.getElementById('month').focus();
-			return false;
-		}
-		if(document.getElementById('year').value=='')
-		{
-			alert('Please select year');
-			document.getElementById('year').focus();
-			return false;
-		}*/
 		if(document.getElementById('newresid').value=='')
 		{
 			alert('Please select initial');
@@ -42,7 +28,7 @@ function tbl_view()
 			  	  data: "month="+month+"&year="+year+"&newresid="+newresid+"&resource="+resource,
 				success:function(data){
 					if(data  != ""){
-					//alert(data);
+						//alert(data);
 			    		document.getElementById('mgrid').innerHTML=data;
 			        	return true;
 					}else{
@@ -53,13 +39,8 @@ function tbl_view()
 		$( "#radio1" ).prop( "checked", true );
 		}
 	}
-	
 function tbl_report()
 	{
-		
-		
-		
-		   
 			month=document.getElementById('month').value;
 			year=document.getElementById('year').value;
 			document.getElementById('newresid').value='';
@@ -71,7 +52,6 @@ function tbl_report()
 			    	data: "month="+month+"&year="+year+"&resource="+resource,
 				success:function(data){
 					if(data  != ""){
-					//alert(data);
 			        	data=data.split("@@@"); 
 			        	$('#numrec').val(data[0]);
 			    		document.getElementById('mgrid').innerHTML=data[1];
@@ -79,7 +59,6 @@ function tbl_report()
 					}else{
 					}
 			    }
-			    	    
 			 });
 			$(document).ready(function() 
 			    { 
@@ -94,11 +73,32 @@ $(document).ready(function(){
 	$( "#radio" ).prop( "checked", true );
 
 $("#exportBtn").click(function(e) {
+	var newresid = document.getElementById('newresid');
+	var opt = newresid.options[newresid.selectedIndex];
+	var option_value=opt.text;
+	//alert( opt.value );
+	//alert( opt.text );
 	
-	var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+ 	var mnth = document.getElementById('month');
+	var op = mnth.options[mnth.selectedIndex];
+	var month=op.text;
+	//var month=document.getElementById('month').value;
+	var year=document.getElementById('year').value;
+	var newresid=document.getElementById('newresid').value;	
+	if($('#radio').is(':checked'))
+	{
+	//alert('hi');
+	var tab_text="<table> <tr> Daily Rating System Report </tr><tr> <td> Period:</td> <td>"+month+"-"+year+"</td></tr></table><table border='2px'><tr bgcolor='#87AFC6'>";
+	}
+	else
+	{
+	//alert('hello');
+	var avg_rate = document.getElementById('avg_rate').value;
+	var beginpoints = document.getElementById('beginpoints').value;
+	var tab_text="<table> <tr> Daily Rating System Report </tr><tr> <td> Period:</td> <td>"+month+"-"+year+"</td></tr><tr><td> Resource:</td><td>"+option_value+"</td></tr><tr><td>Beginning Rate</td><td>"+beginpoints+"</td><td> End Rate</td><td>"+avg_rate+"</td></table><table border='2px'><tr bgcolor='#87AFC6'>";
+	}	
 	var textRange; var j=0;
 	tab = document.getElementById('exporttable'); // id of table
-
 	for(j = 0 ; j < tab.rows.length ; j++)
 	{	
 		tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
@@ -112,7 +112,7 @@ $("#exportBtn").click(function(e) {
 	var ua = window.navigator.userAgent;
 	var msie = ua.indexOf("MSIE ");
 	var a = document.createElement('a');
-	a.filename= 'exported_table.xls';
+	a.filename= 'Report.xls';
 	if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer
 	{
 	txtArea1.document.open("txt/html","replace");
@@ -209,7 +209,8 @@ function sortsub1()
 	                	<input type="hidden" id="exportQuery" name="exportQuery" value="">
 	                	<input type="hidden" id="reportType" name="reportType" value="Transactions">
 	                	<button id="exportBtn" class="btn btn-lg btn-warning custom-btn-01 hover_effect pull-right pull-right-to-left">Export to CSV</button>
-
+</td>
+	<td> <a target="_blank" download="export.csv" href="data:application/csv;charset=utf-8,'+encodeURIComponent(exporttable)+'" class="export">Export Table data into Excel</a>
 </td>
 	         		</tr>
 	         		</tr>

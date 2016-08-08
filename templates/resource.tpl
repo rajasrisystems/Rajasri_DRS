@@ -14,7 +14,7 @@ function validate_rs()
 	}
 	if(document.getElementById('rs_ini').value =="")
 	{
-		document.getElementById('errmsg1').innerHTML = 'Please enter resource initials';
+		document.getElementById('errmsg1').innerHTML = 'Please enter resource initial';
 		document.getElementById('rs_ini').focus();
 		return false;
 	}
@@ -149,7 +149,7 @@ function ressortsub2()
 				{assign var=number value=1}
 				{section name=R loop=$showres}
 				<tr>
-					<td align="left" class="fcaps">{$showres[R].ResourceName}</td>
+					<td align="left">{$showres[R].ResourceName|ucfirst}</td>
 					<td>{$showres[R].ResourceInitial|upper}</td>
 					<td style="padding:8px"><a href="#">
 						<a href="resource.php?Rs_Id={$showres[R].ID}"> <img src="img/b_edit.png"></a>&nbsp;&nbsp;

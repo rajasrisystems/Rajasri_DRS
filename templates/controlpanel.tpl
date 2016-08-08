@@ -14,8 +14,8 @@
     <div class="dashboard-table">
 			<div class="leftcolumn">
 				<div class="stroke" align="center"> 
-				<a href="Admin.php"><img src="img/admin.png" border="0" width="56" height="56" /></a><br />
-				<a href="Admin.php" class="adminlink"><span>Admin Management</span></a> </div>
+				<a href="admin.php"><img src="img/admin.png" border="0" width="56" height="56" /></a><br />
+				<a href="admin.php" class="adminlink"><span>Admin Management</span></a> </div>
 			</div>	
 			<div class="leftcolumn">
 				<div class="stroke" align="center"> 
