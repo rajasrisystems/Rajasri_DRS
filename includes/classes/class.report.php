@@ -38,6 +38,15 @@ class Report extends MysqlFns
 		$objSmarty->assign('oneresdata',$exeresource);
 	
 	}
+	function getuserbyId($id)
+	{
+		global $objSmarty,$config;
+		//Get the details from table for edit option
+		$tempdisvar= "SELECT * FROM admin where ID= ' $id' ";
+		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
+		//$objSmarty->assign('adminDetails', $displaydet);
+		return $displaydet[0]['Username'];
+	}
 	
 }
 ?>

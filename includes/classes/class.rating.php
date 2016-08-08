@@ -57,17 +57,34 @@ class Rating extends MysqlFns
 			elseif($_REQUEST['sortflag']=='6'){
 				$orderBy.="order by Notes desc";
 			}
+			elseif($_REQUEST['sortflag']=='7'){
+				$orderBy.="order by RatingDate asc";
+			}
+			elseif($_REQUEST['sortflag']=='8'){
+				$orderBy.="order by RatingDate desc";
+			}
+			elseif($_REQUEST['sortflag']=='9'){
+				$orderBy.="order by CreatedBy asc";
+			}
+			elseif($_REQUEST['sortflag']=='10'){
+				$orderBy.="order by CreatedBy desc";
+			}
 		}
 		else
 		{
-			$orderBy.="order by ResourceInitial asc";
+			$orderBy.="order by RatingDate asc";
 		}
-		// Displays the records of current date 
-		//$datetemp = date("y/m/d");  
-		//$lastdays = ($datetemp("Y-m-d"),strtotime("-30 days");
-		$tempdisvar= "SELECT * FROM rating r,resource re,code c WHERE r.ResourceID=re.ID and r.CodeID=c.ID  and (r.RatingDate BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE()) $orderBy";
+		$tempdisvar= "SELECT * FROM rating r,resource re,code c WHERE r.ResourceID=re.ID AND r.CodeID=c.ID  AND (r.RatingDate BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE()) $orderBy";
 		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
 		$objSmarty->assign('displaydet', $displaydet);
+	}
+	function managername($id)
+	{
+		global $objSmarty,$config;
+		$dtempdisvar= "SELECT * FROM admin where ID= ' $id' ";
+		$ddisplaydet= $this->ExecuteQuery($dtempdisvar, "select");
+		return $ddisplaydet[0]['Username'];
+	}
 	function Update_rating($id)
 	{
 		global $objSmarty,$config;
@@ -90,7 +107,7 @@ class Rating extends MysqlFns
 		global $objSmarty,$config;
 		//Get the details from table for edit option
 		$datetemp = date("y/m/d");  
-		echo $tempdisvar= "SELECT * FROM rating r,resource re,code c 
+		$tempdisvar= "SELECT * FROM rating r,resource re,code c 
 				   WHERE r.ResourceID=re.ID and r.CodeID=c.ID 
 				   AND r.RatingID=' $id'";
 		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
@@ -104,6 +121,5 @@ class Rating extends MysqlFns
 		$this->ExecuteQuery($tempdrop, "delete");
 		header("location:rating.php?successmsg=2");// redirecting
 	}
-}
 }
 ?>

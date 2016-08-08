@@ -38,7 +38,7 @@ class Admin extends MysqlFns
 		$upfirstname=$_REQUEST['admin_fname'];
 		$upusername = $_REQUEST['admin_text'];
 		$uppassword = $_REQUEST['admin_password'];
-		$select="select * from admin where Username = '".$upusername."'";
+		$select="select * from admin where Username = '".$upusername."' and ID!='$id'";
 		$count=$this->ExecuteQuery($select,'norows');
 		if($count == 0)//the count will be 0 so insert query will happen --- otherwise dont insert ---
 			{
@@ -91,7 +91,7 @@ class Admin extends MysqlFns
 	{
 		global $objSmarty,$config;
 		//Get the details from table for edit option
-		echo $tempdisvar= "SELECT * FROM admin where ID= ' $id' ";
+		$tempdisvar= "SELECT * FROM admin where ID= ' $id' ";
 		$displaydet= $this->ExecuteQuery($tempdisvar, "select");
 		$objSmarty->assign('adminDetails', $displaydet);
 	}

@@ -24,15 +24,11 @@ class Resource extends MysqlFns
 			{
 				$rs_insrt = "INSERT INTO resource(ResourceName, ResourceInitial)values('".$newRs_name."','".$newRs_Init."')";
 				$inst_var = $this->ExecuteQuery($rs_insrt,'insert');
-				$objSmarty->assign("SuccessMessage", "Resource details inserted successfully");
+				$objSmarty->assign("SuccessMessage", "Resource details added successfully");
 			}else{
 				$objSmarty->assign("ErrorMessage", "Resource initial already exist");
-				$objSmarty->assign("ErrorMessage", "Resource initial already exist");
 			}
-		
-		
 	}
-	
 	function show_resource()
 	{
 		global $objSmarty;
@@ -89,7 +85,7 @@ class Resource extends MysqlFns
 		global $objSmarty,$config;
 		$upresname = $_REQUEST['resource_text'];
 		$upresinit = $_REQUEST['resource_initial'];
-		$select="select * from resource where ResourceInitial = '".$upresinit."'";
+		$select="select * from resource where ResourceInitial = '".$upresinit."' and ID!='$id'";
 		$count=$this->ExecuteQuery($select,'norows');// If the Resource initial is not in the table
 		//header("location:resource.php?successmsg=1");//redirect
 		if($count == 0)//the count will be 0 so insert query will happen --- otherwise dont insert ---
