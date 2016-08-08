@@ -1,4 +1,6 @@
 {literal}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script type="text/javascript">
 function validate_rs()
 {
@@ -10,9 +12,6 @@ function validate_rs()
 		document.getElementById('rs_txt').focus();
 		return false;
 	}
-	
-		
-	
 	if(document.getElementById('rs_ini').value =="")
 	{
 		document.getElementById('errmsg1').innerHTML = 'Please enter resource initials';
@@ -50,8 +49,38 @@ function myFunction()
 			return false; 		
 	   	}
 	}
-
-
+function sortfunction()
+	{
+	if((document.getElementById('sortflag').value!="1")&&(document.getElementById('sortflag').value!="2"))
+	{
+		flag=2;
+	}else if(document.getElementById('sortflag').value=="1")
+	{
+		flag=2;
+	}
+	else if(document.getElementById('sortflag').value=="2")
+	{
+		flag=1;
+	}	
+	FormName = document.res_sort;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}
+function ressortsub2()
+{
+	if((document.getElementById('sortflag').value!="3")&&(document.getElementById('sortflag').value!="4")){
+		flag=3;
+	}else if(document.getElementById('sortflag').value=="3")
+	{
+		flag=4;
+	}
+	else if(document.getElementById('sortflag').value=="4"){
+		flag=3;
+	}	
+	FormName = document.res_sort;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+}
 </script>
 {/literal}
 <div id="middle"> 
@@ -99,40 +128,44 @@ function myFunction()
 				
 				<td width="10%" nowrap="nowrap" style="text-align:right;"></td>
 				<td width="5%"><input type ="submit" id="rs_btn" name = "resource_button" value="Submit" onsubmit="validate_rs()"></td>
-
-               
 	        </tr>
 	        </table>
+		</form>
 		<div id = "res_tbl" >	
+		<form name="res_sort" id="res_sort" method="post">
+		<input type="hidden" name="sortflag" id="sortflag" value="{$smarty.request.sortflag}">
 			<table border="0" cellpadding="2" cellspacing="0" class="grid-table">
-				<!--- <th colspan="6" style="text-align:left"> Admin Username List </th> -->
 				<tr>&nbsp;</tr>
-					
-					<th width="8%">Resource Name</th>
-					<th width="8%">Resource Initial</th>
+					<th width="8%">
+					<span style="cursor: pointer; text-decoration: underline;" onclick="sortfunction();">Resource Name
+					</span>
+					</th>
+					<th width="8%">
+					<span style="cursor: pointer; text-decoration: underline;" onclick="ressortsub2();">Resource Initial
+					</span>	
+					</th>
 					<th width="8%">Action</th>
 				</tr>
-					{assign var=number value=1}
-					{section name=R loop=$showres}
+				{assign var=number value=1}
+				{section name=R loop=$showres}
 				<tr>
-					
 					<td align="left" class="fcaps">{$showres[R].ResourceName}</td>
 					<td>{$showres[R].ResourceInitial|upper}</td>
 					<td style="padding:8px"><a href="#">
 						<a href="resource.php?Rs_Id={$showres[R].ID}"> <img src="img/b_edit.png"></a>&nbsp;&nbsp;
 						<a href="rs_drop.php?Del_Id={$showres[R].ID}"><img src="img/b_drop.png" onclick="return myFunction();" ></a>
-							<!-- <input type="hidden" name="delvar" id="delvar" value="{$displaydet[i].RatingID}"> -->
 					</td>
 				</tr>
-					{sectionelse}
-					<tr>
-						<td colspan="3">No Records Found</td>
-					</tr>
-					{/section}
+				{sectionelse}
+				<tr>
+					<td colspan="3">No Records Found</td>
+				</tr>
+				{/section}
 			</table>
+			</form>
 		</div>
-			 </form>
+		
 	      </div>	  
-		</div>
+	</div>
 </div>
 

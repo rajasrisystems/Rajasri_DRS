@@ -1,6 +1,7 @@
 {literal}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script type="text/javascript">
-
 function validate_ad()
 {
 	
@@ -48,7 +49,40 @@ function myFunction()
 			return false; 		
 	   	}
 	}
-
+function sortsub1()
+	{
+	if((document.getElementById('sortflag').value!="1")&&(document.getElementById('sortflag').value!="2"))
+	{
+		flag=2;
+	}else if(document.getElementById('sortflag').value=="1")
+	{
+		flag=2;
+	}
+	else if(document.getElementById('sortflag').value=="2")
+	{
+		flag=1;
+	}	
+	FormName = document.admin_form;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}
+function sortsub2()
+	{
+	if((document.getElementById('sortflag').value!="3")&&(document.getElementById('sortflag').value!="4"))
+	{
+		flag=4;
+	}else if(document.getElementById('sortflag').value=="3")
+	{
+		flag=4;
+	}
+	else if(document.getElementById('sortflag').value=="4")
+	{
+		flag=3;
+	}
+	FormName = document.admin_form;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}	
 </script>
 {/literal}
 <div id="middle"> 
@@ -60,7 +94,7 @@ function myFunction()
 		<br/>
 		<div class = "manage-grid">
 			<div class="report-page" style="text-align:left;">
-					<form action="" name="rptpage" method="post" onsubmit="return validate_ad()">
+			<form action="" name="rptpage" method="post" onsubmit="return validate_ad()">
 						<input type="hidden" id="hdAction" name="hdAction" value="">
 						<input type="hidden" id="AdminID" name="AdminID" value="{$smarty.request.Ad_Id}">
 						<input type="hidden" id="updateAction" name="updateAction" value="">
@@ -76,7 +110,8 @@ function myFunction()
 				</tr>
 			<tr style="border-bottom:none;">
 				
-				 
+				<td width="10%" nowrap="nowrap" style="text-align:right;">Name:</td>
+				<td width="5%"><input type ="text" id="ad_txt" name = "admin_fname" value="{$adminDetails.0.Name}"></td>
 				
 				<td width="10%" nowrap="nowrap" style="text-align:right;">Username:</td>
 				<td width="5%"><input type ="text" id="ad_txt" name = "admin_text" value="{$adminDetails.0.Username}"></td>
@@ -85,27 +120,26 @@ function myFunction()
 				
 				<td width="10%" nowrap="nowrap" style="text-align:right;">Password:</td>
 				<td width="5%"><input type ="password" id="ad_pass" name = "admin_password" value="{$adminDetails.0.Password}" ></td>
-				
-				
-				
 				<td width="10%" nowrap="nowrap" style="text-align:right;"></td>
 				<td width="5%"><input type ="submit" id="rs_btn" name = "admin_button" value="Submit" ></td>
 
                
 	        </tr>
 	        </table>
+		</form>
 		<div id = "res_tbl" >	
+		<form name="admin_form" id="admin_form" method="post" >
+		<input type="hidden" name="sortflag" id="sortflag" value="{$smarty.request.sortflag}">
 			<table border="0" cellpadding="2" cellspacing="0" class="grid-table">
 				<!--- <th colspan="6" style="text-align:left"> Admin Username List </th> -->
 				<tr>&nbsp;</tr>
-					
-					<th width="8%">Username</th>
+					<th width="8%"><span style="cursor: pointer; text-decoration: underline;" onclick="sortsub1();">Name</span></th>
+					<th width="8%"><span style="cursor: pointer; text-decoration: underline;" onclick="sortsub2();">Username</span></th>
 					<th width="8%">Action</th>
 				</tr>
-					
 					{section name=R loop=$showval}
 				<tr>
-					
+					<td>{$showval[R].Name}</td>
 					<td>{$showval[R].Username|upper}</td>
 					<td style="padding:8px"><a href="#">
 						<a href="admin.php?Ad_Id={$showval[R].ID}"> <img src="img/b_edit.png"></a>&nbsp;&nbsp;
@@ -120,7 +154,7 @@ function myFunction()
 						{/section}
 				</table>
 				</div>
-			 </form>
+			 
 	      </div>	  
 	</div>
 </div>

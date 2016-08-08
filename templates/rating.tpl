@@ -190,18 +190,18 @@
 			<th colspan="7" style="text-align:left"> Report </th>
 			<tr>&nbsp;</tr>
 			<th width="8%">
-			<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub1();">Resource</span>
+				<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub1();">Resource</span>
 			</th>
 			<th width="12%">
-			<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub2();">Code</span>
+				<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub2();">Code</span>
 			</th>
-			<th><span style="cursor: pointer; text-decoration: underline;" onclick="sortsub3();">Notes</span>  
+			<th>
+				<span style="cursor: pointer; text-decoration: underline;" onclick="sortsub3();">Notes</span>  
 			</th>
 			<th width="12%">Action</th> 
 			{assign var=number value=1}
 			  {section name=i loop=$displaydet}
 			   <tr>
-
 				<td>{$displaydet[i].ResourceInitial}</td>
 				<td>{$displaydet[i].Code}</td>
 				<td  style="text-align:left">{if $displaydet[i].Notes neq ''}{$displaydet[i].Notes}{else} - {/if} </td>

@@ -6,7 +6,8 @@
 	<link rel="stylesheet" href="css/jquery-ui.css">
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
+	<script type="text/javascript" src="/path/to/jquery-latest.js"></script> 
+	<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script> 
 <script>
 function tbl_view()
 	{
@@ -55,23 +56,10 @@ function tbl_view()
 	
 function tbl_report()
 	{
-		if(document.getElementById('month').value=='')
-		{
-			alert('Please select month');
-			document.getElementById('month').focus();
-			return false;
-		}
-		if(document.getElementById('year').value=='')
-		{
-			alert('Please select year');
-			document.getElementById('year').focus();
-			return false;
-		}
-		else
-		{
-		/*document.getElementById("dataction").value='1';
-		document.rptpage.submit();*/
-		    //document.getElementById("dataction").value=1;
+		
+		
+		
+		   
 			month=document.getElementById('month').value;
 			year=document.getElementById('year').value;
 			document.getElementById('newresid').value='';
@@ -80,7 +68,7 @@ function tbl_report()
 			$.ajax({
 				url:'getresource.php',
 				type: "POST",
-			    data: "month="+month+"&year="+year+"&resource="+resource,
+			    	data: "month="+month+"&year="+year+"&resource="+resource,
 				success:function(data){
 					if(data  != ""){
 					//alert(data);
@@ -93,7 +81,12 @@ function tbl_report()
 			    }
 			    	    
 			 });
-		}
+			$(document).ready(function() 
+			    { 
+			        $("#mgrid").tablesorter(); 
+			    } 
+			); 
+		
 		$( "#radio" ).prop( "checked", true );
 	}	
 $(document).ready(function(){
@@ -143,7 +136,23 @@ function chkResource(){
 		tbl_view();
 	}
 }
-
+function sortsub1()
+	{
+	if((document.getElementById('sortflag').value!="1")&&(document.getElementById('sortflag').value!="2"))
+	{
+		flag=2;
+	}else if(document.getElementById('sortflag').value=="1")
+	{
+		flag=2;
+	}
+	else if(document.getElementById('sortflag').value=="2")
+	{
+		flag=1;
+	}	
+	FormName = document.admin_form;
+	FormName.sortflag.value=flag;
+	FormName.submit();
+	}
 </script>
 {/literal}
 <!--Design Prepared by Rajasri Systems-->   
@@ -209,20 +218,10 @@ function chkResource(){
 		</form>
 	      </div>	  
 	<br/>
-	
-	<div class="report_view" id="mgrid" >
-		<table border="0" cellpadding="2" cellspacing="0" class="grid-table">
-			<tr>
-				<th>Resource</th>
-				<th>Beginning Rate</th>
-				<th>End Rate</th>
-			</tr> 
-			<tr>
-				<td colspan="5"> No records found </td>
-			</tr>
-			
-		</table>
-	</div>
+		<input type="hidden" name="sortflag" id="sortflag" value="{$smarty.request.sortflag}">
+		<div class="report_view" id="mgrid" >
+		
+		</div>
  </div>
 </div>
 </div>	
